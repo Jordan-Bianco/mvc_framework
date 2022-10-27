@@ -1,4 +1,4 @@
-### PHP Framework
+## PHP Framework
 A simple mvc framework for building web applications.
 
 &nbsp;
@@ -104,8 +104,7 @@ public function __construct()
 &nbsp;
 
 ### 👷 Query builder
-To interact with the database, the QueryBuilder class is used, which has access to the PDO instance. <br>
-Thanks to this class it is possible to interact with the database, with the security offered by PDO prepared statements.
+The Query builder class is used to interact with the database and perform operations on it. This class has access to the PDO instance. <br>
 <br>
 Examples:
 ```php
@@ -127,3 +126,14 @@ $tweet = $this->app->builder
   ->where('id', $request->routeParams['id'], '=', 'tweets.')
   ->first();
 ```
+
+## Usage
+* Clone the project with "git clone https://github.com/Jordan-Bianco/mvc_framework.git"
+* Run the command "composer install"
+* Enter the public folder
+* Launch the server with the command "php -S localhost:8888"
+* Create the .env file and copy the contents of the .env-example file, entering your credentials
+
+
+
+
