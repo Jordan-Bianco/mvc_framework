@@ -138,6 +138,7 @@ class Validation
                 }
             }
 
+            // Rule exists
             if (str_contains($fieldValue['rules'], 'exists')) {
 
                 $arr = explode(',', $fieldValue['rules']);

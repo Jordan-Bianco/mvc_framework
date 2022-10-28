@@ -17,6 +17,7 @@ class AuthMiddleware extends BaseMiddleware
     {
         if (!Application::$app->session->isLoggedIn()) {
             Application::$app->response->redirect('/login');
+            exit;
         }
     }
 }

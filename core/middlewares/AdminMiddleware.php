@@ -18,6 +18,7 @@ class AdminMiddleware extends BaseMiddleware
         /** wip - controllo se admin in base all'email */
         if (Application::$app->session->get('user')['username'] !== 'admin@admin.com') {
             Application::$app->response->redirect('/');
+            exit;
         }
     }
 }

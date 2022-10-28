@@ -17,6 +17,7 @@ class GuestMiddleware extends BaseMiddleware
     {
         if (Application::$app->session->isLoggedIn()) {
             Application::$app->response->redirect('/');
+            exit;
         }
     }
 }
