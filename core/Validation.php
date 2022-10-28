@@ -16,6 +16,7 @@ class Validation
         'email' => 'Il campo :field: deve contenere un indirizzo email valido.',
         'alpha_dash' => 'Il campo :field: può contenere solo lettere, numeri, trattini e underscore.',
         'unique' => 'Il campo :field: è già presente nella tabella {table}.',
+        'exists' => 'Il campo :field: non è presente nel database.',
         'min' => 'Il campo :field: non può essere di lunghezza inferiore a {min} caratteri.',
         'max' => 'Il campo :field: non può essere di lunghezza superiore a {max} caratteri.',
         'match' => 'Il campo :field: deve essere uguale al campo {match}.',
@@ -134,6 +135,26 @@ class Validation
                     if (in_array($fieldValue[$field], $columns)) {
                         $this->addError($field, 'unique', ['table' => $table]);
                     }
+                }
+            }
+
+            if (str_contains($fieldValue['rules'], 'exists')) {
+
+                $arr = explode(',', $fieldValue['rules']);
+
+                $existsRule = array_filter($arr, function ($value) {
+                    return str_contains($value, 'exists');
+                });
+
+                $table = explode(':', array_values($existsRule)[0])[1];
+
+                $fieldInDb = Application::$app->builder
+                    ->select($table)
+                    ->where($field, $fieldValue[$field])
+                    ->first();
+
+                if (!$fieldInDb) {
+                    $this->addError($field, 'exists', ['table' => $table]);
                 }
             }
 
