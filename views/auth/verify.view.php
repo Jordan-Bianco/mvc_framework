@@ -1,4 +1,5 @@
 <?php
+
 use App\core\Application;
 
 $queryString = $_SERVER['QUERY_STRING'] ?? false;
@@ -19,7 +20,7 @@ $user = Application::$app->builder
     ->first();
 
 /** Se il token nella url non corrisponde al token assegnato all'utente, redirect home */
-if (!$user['token'] === $token) {
+if ($user['token'] !== $token) {
     Application::$app->response->redirect('/');
     return;
 }
