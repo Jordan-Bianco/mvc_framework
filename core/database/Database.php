@@ -124,11 +124,14 @@ class Database
 
     public function truncateDatabaseTables()
     {
-        $query = 'SHOW TABLES';
-        $stmt = $this->pdo->prepare($query);
+        $this->pdo->exec("SET FOREIGN_KEY_CHECKS=0");
+
+        $stmt = $this->pdo->prepare("SHOW TABLES");
         $stmt->execute();
 
-        foreach ($stmt->fetchAll() as $table) {
+        $tables = $stmt->fetchAll();
+
+        foreach ($tables as $table) {
             if (implode($table) === 'migrations') {
                 continue;
             }
@@ -136,19 +139,26 @@ class Database
             $this->pdo->exec($query);
             $this->log("Truncated table " . implode($table));
         }
+
+        $this->pdo->exec("SET FOREIGN_KEY_CHECKS=1");
     }
 
     public function dropDatabaseTables()
     {
-        $query = 'SHOW TABLES';
-        $stmt = $this->pdo->prepare($query);
+        $this->pdo->exec("SET FOREIGN_KEY_CHECKS=0");
+
+        $stmt = $this->pdo->prepare("SHOW TABLES");
         $stmt->execute();
 
-        foreach ($stmt->fetchAll() as $table) {
+        $tables = $stmt->fetchAll();
+
+        foreach ($tables as $table) {
             $query = "DROP TABLE " . implode($table);
             $this->pdo->exec($query);
             $this->log("Dropped table " . implode($table));
         }
+
+        $this->pdo->exec("SET FOREIGN_KEY_CHECKS=1");
     }
 
     /**
