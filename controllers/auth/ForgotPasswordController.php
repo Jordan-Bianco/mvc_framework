@@ -1,7 +1,8 @@
 <?php
 
-namespace App\controllers;
+namespace App\controller\auth;
 
+use App\controllers\Controller;
 use App\core\Auth;
 use App\core\middlewares\GuestMiddleware;
 use App\core\Request;

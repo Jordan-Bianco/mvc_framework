@@ -1,9 +1,9 @@
 <?php
 
-use App\controllers\LoginController;
-use App\controllers\RegisterController;
-use App\controllers\ForgotPasswordController;
-use App\controllers\ResetPasswordController;
+use App\controller\auth\ForgotPasswordController;
+use App\controllers\auth\LoginController;
+use App\controllers\auth\RegisterController;
+use App\controllers\auth\ResetPasswordController;
 
 $app->router->get('/login', [LoginController::class, 'show']);
 $app->router->post('/login', [LoginController::class, 'login']);

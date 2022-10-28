@@ -141,7 +141,7 @@ $tweet = $this->app->builder
 
 ## Usage
 
--   Clone the project with "git clone https://github.com/Jordan-Bianco/mvc_framework.git"
+-   Copy the project with "git fork https://github.com/Jordan-Bianco/mvc_framework.git"
 -   Run the command "composer install"
 -   Enter the public folder
 -   Launch the server with the command "php -S localhost:8888"
