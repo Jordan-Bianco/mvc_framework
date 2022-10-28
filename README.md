@@ -1,22 +1,25 @@
 ## PHP Framework
+
 A simple mvc framework for building web applications.
 
 &nbsp;
 
 ### :lock: Authentication
 
-* User registration
-  * Password hash
-  * Send email to verify account
+-   User registration
 
-* Login, logout
+    -   Password hash
+    -   Send email to verify account
+    -   Password reset
+
+-   Login, logout
 
 &nbsp;
 
 ### :round_pushpin: Router
 
 Each route consists of two parameters.
-The first parameter is the `url`, the second parameter can be an `array`, a `string` or a `callback`. 
+The first parameter is the `url`, the second parameter can be an `array`, a `string` or a `callback`.
 Depending on the case the router will call the correct method.<br>
 To register a route, (both get and post) the following syntax is used:
 
@@ -38,8 +41,9 @@ $app->router->get('/users/{id}', [UserController::class, 'show']);
 &nbsp;
 
 ### :heavy_check_mark: Data validation
+
 To validate the data from a form, it is used the `Validation` class (which is extended by the `Request` class). <br>
-The array containing the form data, the rules specified for the various fields, and a string that refers to the view to be loaded in case of validation errors are passed to the `validate` method. 
+The array containing the form data, the rules specified for the various fields, and a string that refers to the view to be loaded in case of validation errors are passed to the `validate` method.
 
 ```php
 $rules = [
@@ -49,7 +53,7 @@ $rules = [
 $validated = $request->validate($_POST, $rules, '/login');
 ```
 
-If there are no validation errors, the `$validated` variable will contain the sanitized and validated data entered by the user.<br> 
+If there are no validation errors, the `$validated` variable will contain the sanitized and validated data entered by the user.<br>
 The list that refers to the validation rules, and related messages, is contained in the Validation class, in the `$availableRules` array.
 
 ```php
@@ -62,6 +66,7 @@ protected $availableRules = [
 ```
 
 The rules where placeholders are contained are specified as follows:
+
 ```php
 'password_confirm' => ['required', 'match:password'],
 ```
@@ -74,14 +79,17 @@ Each class inside the migrations folder has an `up` method inside, with which it
 It is possible to create or delete tables, as well as add or remove fields from existing tables.<br>
 The migrations system is managed inside the `core\database` folder, in the `Database.php` file.<br>
 To apply the various migrations, the `migrations.php` file is called from the terminal, to which one of the following flags can be passed:<br>
-* drop, which drops all the tables.
-* truncate, which removes all data within the tables.
+
+-   drop, which drops all the tables.
+-   truncate, which removes all data within the tables.
 
 &nbsp;
 
 ### :passport_control: Middleware
+
 Each middleware is registered inside the `core\middlewares` folder and must extend the `BaseMiddleware` class. <br>
 Each new middleware must implement the `execute` method, within which the logic is implemented.<br>
+
 ```php
 public function execute()
   {
@@ -90,13 +98,15 @@ public function execute()
     }
   }
 ```
+
 To apply middleware to a controller, you pass it in the constructor, and call the `registerMiddleware` method.<br>
 It is also necessary to pass into the middleware constructor an array containing the methods on which you want to apply the middleware.
+
 ```php
 public function __construct()
   {
     parent::__construct();
-    
+
     $this->registerMiddleware(new GuestMiddleware(['login']));
   }
 ```
@@ -104,15 +114,17 @@ public function __construct()
 &nbsp;
 
 ### 👷 Query builder
+
 The Query builder class is used to interact with the database and perform operations on it. This class has access to the PDO instance. <br>
 <br>
 Examples:
+
 ```php
 $user = $this->app->builder
   ->select('users', ['id', 'username', 'email'])
   ->where('id', $request->routeParams['id'])
   ->first()
-  
+
 $tweet = $this->app->builder
   ->select('tweets', [
     'tweets.*',
@@ -128,12 +140,9 @@ $tweet = $this->app->builder
 ```
 
 ## Usage
-* Clone the project with "git clone https://github.com/Jordan-Bianco/mvc_framework.git"
-* Run the command "composer install"
-* Enter the public folder
-* Launch the server with the command "php -S localhost:8888"
-* Create the .env file and copy the contents of the .env-example file, entering your credentials
 
-
-
-
+-   Clone the project with "git clone https://github.com/Jordan-Bianco/mvc_framework.git"
+-   Run the command "composer install"
+-   Enter the public folder
+-   Launch the server with the command "php -S localhost:8888"
+-   Create the .env file and copy the contents of the .env-example file, entering your credentials
