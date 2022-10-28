@@ -53,6 +53,6 @@ class RegisterController extends Controller
         Auth::sendVerificationMail($user);
 
         $this->app->response->redirect('/login')
-            ->with('success', 'Grazie per esserti registrato. Ti è stata inviata una mail per verificare il tuo account.');
+            ->with('success', 'Grazie per esserti registrato. Ti è stata inviata una mail al tuo indirizzo ' . $user['email'] . ' per verificare il tuo account.');
     }
 }
