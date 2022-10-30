@@ -1,6 +1,10 @@
 ## PHP Framework
 
 A simple mvc framework for building web applications.
+The framework, written using php8, has the basic features to create web applications, such as a routing system, an authentication system, a session management system and other features you can read about below. <br>
+The framework is made entirely from scratch.
+I only used two packages, PHPmailer to manage the sending of emails, and a package to manage environment variables `vlucas/ phpdotenv`.
+
 &nbsp;
 
 ### Usage
@@ -14,6 +18,9 @@ A simple mvc framework for building web applications.
 &nbsp;
 
 ### :lock: Authentication
+
+The framework has a complete authentication system. From user registration, to password recovery, to account deletion. <br>
+All authentication-related routes can be found in the `routes` folder, in the `auth.php` file
 
 -   User registration
 
