@@ -36,10 +36,23 @@ class Response
 
     /**
      * @param array $value
-     * @return void
+     * @return Response
      */
-    public function withValidationErrors(array $value): void
+    public function withValidationErrors(array $value): Response
     {
         Application::$app->session->setValidationErrors($value);
+
+        return $this;
+    }
+
+    /**
+     * @param array $value
+     * @return Response
+     */
+    public function withOldData(array $value): Response
+    {
+        Application::$app->session->setOldData($value);
+
+        return $this;
     }
 }

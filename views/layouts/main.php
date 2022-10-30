@@ -22,22 +22,16 @@ use App\core\Application;
 
     <div class="p-6 max-w-6xl mx-auto">
 
-        <?php if (isset($_SESSION['success'])): ?>
-        <div class="bg-green-100 text-green-500 p-4 rounded-lg mt-2 mb-6">
-            <?php Application::$app->session->getFlashMessage('success') ?>
-        </div>
+        <?php if (isset($_SESSION['success'])) : ?>
+            <div class="bg-green-100 text-green-500 p-4 rounded-lg mt-2 mb-6">
+                <?php Application::$app->session->getFlashMessage('success') ?>
+            </div>
         <?php endif ?>
 
-        <?php if (isset($_SESSION['error'])): ?>
-        <div class="bg-red-100 text-red-500 p-4 rounded-lg mt-2 mb-6">
-            <?php Application::$app->session->getFlashMessage('error') ?>
-        </div>
-        <?php endif ?>
-
-        <?php if (isset($_SESSION['info'])): ?>
-        <div class="bg-blue-100 text-blue-500 p-4 rounded-lg mt-2 mb-6">
-            <?php Application::$app->session->getFlashMessage('info') ?>
-        </div>
+        <?php if (isset($_SESSION['error'])) : ?>
+            <div class="bg-red-100 text-red-500 p-4 rounded-lg mt-2 mb-6">
+                <?php Application::$app->session->getFlashMessage('error') ?>
+            </div>
         <?php endif ?>
 
         {{ content }}

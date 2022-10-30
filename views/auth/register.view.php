@@ -1,7 +1,6 @@
 <?php
 
 use App\core\Application;
-use App\core\form\Form;
 
 /** @var $this \app\core\Renderer  */
 $this->title .= ' - Registrati';
@@ -15,30 +14,21 @@ $this->title .= ' - Registrati';
         </p>
 
         <!-- ValidationErrors -->
-        <?php if (isset($_SESSION['validationErrors'])) : ?>
-            <div class="bg-red-100 text-red-500 font-medium p-4 rounded-lg my-3 text-xs">
-                <?php foreach (Application::$app->session->getValidationErrors() as $error) : ?>
-                    <span class="block">
-                        <?= $error ?>
-                    </span>
-                <?php endforeach ?>
-                <?php Application::$app->session->removeValidationErrors() ?>
-            </div>
-        <?php endif ?>
+        <?php require_once ROOT_PATH . '/views/partials/validationErrors.php' ?>
 
         <form action="register" method="POST">
             <div class="mb-5">
                 <label for="username" class="block mb-1 text-gray-600 text-xs">
                     Username
                 </label>
-                <input name="username" placeholder="Username" type="text" value="<?= isset($data['username']) ? $data['username'] : '' ?>" class="w-full text-xs px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200 transition">
+                <input name="username" placeholder="Username" type="text" value="<?= Application::$app->session->getOldData('username') ?>" class="w-full text-xs px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200 transition">
             </div>
 
             <div class="mb-5">
                 <label for="email" class="block mb-1 text-gray-600 text-xs">
                     Email
                 </label>
-                <input name="email" placeholder="Example@email.com" type="email" value="<?= isset($data['email']) ? $data['email'] : '' ?>" class="w-full text-xs px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200 transition">
+                <input name="email" placeholder="Example@email.com" type="email" value="<?= Application::$app->session->getOldData('email') ?>" class="w-full text-xs px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200 transition">
             </div>
 
             <div class="mb-5">

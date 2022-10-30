@@ -94,6 +94,33 @@ class Session
     }
 
     /**
+     * @param array $value
+     * @return void
+     */
+    public function setOldData(array $value): void
+    {
+        $sensitive = [
+            'password',
+            'password_confirm'
+        ];
+
+        $value = array_diff_key($value, array_flip($sensitive));
+
+        $_SESSION['oldData'] = $value;
+    }
+
+    /**
+     * @param string $key
+     * @return void
+     */
+    public function getOldData(string $key): void
+    {
+        echo isset($_SESSION['oldData'][$key]) ? $_SESSION['oldData'][$key] : '';
+
+        unset($_SESSION['oldData'][$key]);
+    }
+
+    /**
      * @return bool 
      */
     public static function isLoggedIn(): bool

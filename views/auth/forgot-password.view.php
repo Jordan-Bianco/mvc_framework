@@ -12,23 +12,14 @@ $this->title .= ' - Password dimenticata';
         <p class="text-center text-gray-400 text-xs mb-6">Inserisci il tuo indirizzo email, ti verrà inviata una mail contenente un link per resettare la password.</p>
 
         <!-- ValidationErrors -->
-        <?php if (isset($_SESSION['validationErrors'])) : ?>
-            <div class="bg-red-100 text-red-500 font-medium p-4 rounded-lg my-3 text-xs">
-                <?php foreach (Application::$app->session->getValidationErrors() as $error) : ?>
-                    <span class="block">
-                        <?= $error ?>
-                    </span>
-                <?php endforeach ?>
-                <?php Application::$app->session->removeValidationErrors() ?>
-            </div>
-        <?php endif ?>
+        <?php require_once ROOT_PATH . '/views/partials/validationErrors.php' ?>
 
         <form action="/forgot-password" method="POST">
             <div class="mb-5">
                 <label for="email" class="block mb-1 text-gray-600 text-xs">
                     Email
                 </label>
-                <input name="email" placeholder="Inserisci la tua email" type="email" class="w-full text-xs px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200 transition">
+                <input name="email" placeholder="Inserisci la tua email" type="email" value="<?= Application::$app->session->getOldData('email') ?>" class="w-full text-xs px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200 transition">
             </div>
 
             <button type="submit" class="tracking-wide w-full bg-indigo-400 hover:bg-indigo-500 text-white p-3 rounded-md text-xs">

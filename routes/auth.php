@@ -1,6 +1,6 @@
 <?php
 
-use App\controller\auth\ForgotPasswordController;
+use App\controllers\auth\ForgotPasswordController;
 use App\controllers\auth\LoginController;
 use App\controllers\auth\RegisterController;
 use App\controllers\auth\ResetPasswordController;

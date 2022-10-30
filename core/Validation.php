@@ -46,7 +46,8 @@ class Validation
         if (!empty($this->errors)) {
 
             Application::$app->response->redirect($url)
-                ->withValidationErrors($this->errors);
+                ->withValidationErrors($this->errors)
+                ->withOldData($data);
 
             exit;
         }
