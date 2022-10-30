@@ -15,7 +15,7 @@ A simple mvc framework for building web applications.
 
 &nbsp;
 
-#### :lock: Authentication
+### :lock: Authentication
 
 -   User registration
 
@@ -27,7 +27,7 @@ A simple mvc framework for building web applications.
 
 &nbsp;
 
-#### :round_pushpin: Router
+### :round_pushpin: Router
 
 Each route consists of two parameters.
 The first parameter is the `url`, the second parameter can be an `array`, a `string` or a `callback`.
@@ -51,7 +51,7 @@ $app->router->get('/users/{id}', [UserController::class, 'show']);
 
 &nbsp;
 
-#### :heavy_check_mark: Data validation
+### :heavy_check_mark: Data validation
 
 To validate the data from a form, it is used the `Validation` class (which is extended by the `Request` class). <br>
 The array containing the form data, the rules specified for the various fields, and a string that refers to the view to be loaded in case of validation errors are passed to the `validate` method.
@@ -84,7 +84,7 @@ The rules where placeholders are contained are specified as follows:
 
 &nbsp;
 
-#### :arrows_counterclockwise: Migrations
+### :arrows_counterclockwise: Migrations
 
 Each class inside the migrations folder has an `up` method inside, with which it is possible to interact with the database. <br>
 It is possible to create or delete tables, as well as add or remove fields from existing tables.<br>
@@ -96,7 +96,7 @@ To apply the various migrations, the `migrations.php` file is called from the te
 
 &nbsp;
 
-#### :no_entry_sign: Middleware
+### :no_entry_sign: Middleware
 
 Each middleware is registered inside the `core\middlewares` folder and must extend the `BaseMiddleware` class. <br>
 Each new middleware must implement the `execute` method, within which the logic is implemented.<br>
@@ -124,7 +124,7 @@ public function __construct()
 
 &nbsp;
 
-#### 👷 Query builder
+### 👷 Query builder
 
 The Query builder class is used to interact with the database and perform operations on it. This class has access to the PDO instance.
 <br>
@@ -152,7 +152,7 @@ $tweet = $this->app->builder
 
 &nbsp;
 
-#### :zap: Flash messages
+### :zap: Flash messages
 
 Through the `getValidationErrors()` function it is possible to show errors to users.<br>
 This function accepts an optional string parameter, `$key`,
