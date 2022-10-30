@@ -1,17 +1,15 @@
 ## PHP Framework
 
 A simple mvc framework for building web applications.
+&nbsp;
 
-### Table of contents
+### Usage
 
--   [Authentication](#:lock:-authentication)
--   [Router](#:round_pushpin:-router)
--   [Data Validation](#:heavy_check_mark:-data-validation)
--   [Migrations](#:arrows_counterclockwise:-migrations)
--   [Middleware](#:no_entry_sign:-middleware)
--   [Query Builder](#👷-query-builder)
--   [Flash Messages](#:zap:-flash-messages)
--   [Usage](#usage)
+-   Clone the project with "git clone https://github.com/Jordan-Bianco/mvc_framework.git"
+-   Run the command "composer install"
+-   Enter the public folder
+-   Launch the server with the command "php -S localhost:8888"
+-   Create the .env file and copy the contents of the .env-example file, entering your credentials
 
 &nbsp;
 
@@ -163,13 +161,3 @@ which will return only the required key from the validationErrors array.
 ```
 
 If no parameters are passed to the function, it will return all errors.
-
-&nbsp;
-
-### Usage
-
--   Clone the project with "git clone https://github.com/Jordan-Bianco/mvc_framework.git"
--   Run the command "composer install"
--   Enter the public folder
--   Launch the server with the command "php -S localhost:8888"
--   Create the .env file and copy the contents of the .env-example file, entering your credentials
