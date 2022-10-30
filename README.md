@@ -4,13 +4,13 @@ A simple mvc framework for building web applications.
 
 ### Table of contents
 
--   [Authentication](#authentication)
--   [Router](#router)
--   [Data Validation](#data-validation)
--   [Migrations](#migrations)
--   [Middleware](#middleware)
--   [Query Builder](#query-builder)
--   [Flash Messages](#flash-messages)
+-   [Authentication](#:lock:-authentication)
+-   [Router](#:round_pushpin:-router)
+-   [Data Validation](#:heavy_check_mark:-data-validation)
+-   [Migrations](#:arrows_counterclockwise:-migrations)
+-   [Middleware](#:no_entry_sign:-middleware)
+-   [Query Builder](#👷-query-builder)
+-   [Flash Messages](#:zap:-flash-messages)
 -   [Usage](#usage)
 
 &nbsp;
