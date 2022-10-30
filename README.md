@@ -2,6 +2,14 @@
 
 A simple mvc framework for building web applications.
 
+## Usage
+
+-   Clone the project with "git clone https://github.com/Jordan-Bianco/mvc_framework.git"
+-   Run the command "composer install"
+-   Enter the public folder
+-   Launch the server with the command "php -S localhost:8888"
+-   Create the .env file and copy the contents of the .env-example file, entering your credentials
+
 &nbsp;
 
 ### :lock: Authentication
@@ -138,11 +146,3 @@ $tweet = $this->app->builder
   ->where('id', $request->routeParams['id'], '=', 'tweets.')
   ->first();
 ```
-
-## Usage
-
--   Clone the project with "git clone https://github.com/Jordan-Bianco/mvc_framework.git"
--   Run the command "composer install"
--   Enter the public folder
--   Launch the server with the command "php -S localhost:8888"
--   Create the .env file and copy the contents of the .env-example file, entering your credentials
