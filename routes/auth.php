@@ -1,5 +1,7 @@
 <?php
 
+use App\controllers\auth\DashboardController;
+use App\controllers\auth\DeleteAccountController;
 use App\controllers\auth\ForgotPasswordController;
 use App\controllers\auth\LoginController;
 use App\controllers\auth\RegisterController;
@@ -19,3 +21,8 @@ $app->router->post('/forgot-password', [ForgotPasswordController::class, 'forgot
 
 $app->router->get('/password-reset', [ResetPasswordController::class, 'show']);
 $app->router->post('/password-reset', [ResetPasswordController::class, 'reset']);
+
+$app->router->get('/dashboard', [DashboardController::class, 'dashboard']);
+
+$app->router->get('/delete-account', [DeleteAccountController::class, 'show']);
+$app->router->post('/delete-account', [DeleteAccountController::class, 'destroy']);

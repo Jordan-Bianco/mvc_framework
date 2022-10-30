@@ -52,7 +52,7 @@ class LoginController extends Controller
 
         $this->app->session->set('user', $user);
 
-        $this->app->response->redirect('/')
+        $this->app->response->redirect('/dashboard')
             ->with('success', "Bentornato <strong> " . $user['username'] . "</strong>");
     }
 

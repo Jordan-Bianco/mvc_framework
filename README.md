@@ -22,6 +22,7 @@ A simple mvc framework for building web applications.
     -   Password reset
 
 -   Login, logout
+-   Delete account
 
 &nbsp;
 
