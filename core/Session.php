@@ -78,10 +78,18 @@ class Session
     }
 
     /**
-     * @return array
+     * @param null|string $key
      */
-    public function getValidationErrors(): array
+    public function getValidationErrors(?string $key = null)
     {
+        if ($key) {
+            echo $_SESSION['validationErrors'][$key] ?? '';
+
+            unset($_SESSION['validationErrors'][$key]);
+
+            return;
+        }
+
         return $_SESSION['validationErrors'];
     }
 

@@ -13,15 +13,16 @@ $this->title .= ' - Login';
             <span class="text-indigo-500"><a href="/register">Registrati</a></span>
         </p>
 
-        <!-- ValidationErrors -->
-        <?php require_once ROOT_PATH . '/views/partials/validationErrors.php' ?>
-
         <form action="login" method="POST">
             <div class="mb-5">
                 <label for="email" class="block mb-1 text-gray-600 text-xs">
                     Email
                 </label>
                 <input name="email" placeholder="Example@email.com" type="email" value="<?= Application::$app->session->getOldData('email') ?>" class="w-full text-xs px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200 transition">
+
+                <p class="text-red-500 font-medium text-xs mt-1.5">
+                    <?= Application::$app->session->getValidationErrors('email') ?>
+                </p>
             </div>
 
             <div class="mb-2">
@@ -29,6 +30,10 @@ $this->title .= ' - Login';
                     Password
                 </label>
                 <input name="password" placeholder="Inserisci la tua password" type="password" class="w-full text-xs px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200 transition">
+
+                <p class="text-red-500 font-medium text-xs mt-1.5">
+                    <?= Application::$app->session->getValidationErrors('password') ?>
+                </p>
             </div>
             <a class="block text-xs text-gray-400 hover:underline mb-6" href="/forgot-password">Password dimenticata?</a>
 

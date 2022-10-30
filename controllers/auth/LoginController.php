@@ -36,7 +36,7 @@ class LoginController extends Controller
 
         if (!$user) {
             $this->app->response->redirect('/login')
-                ->withValidationErrors(['Credenziali non corrette.'])
+                ->withValidationErrors(['email' => 'Credenziali non corrette.'])
                 ->withOldData($validated);
 
             return;
@@ -44,7 +44,7 @@ class LoginController extends Controller
 
         if (!Auth::isVerified($user)) {
             $this->app->response->redirect('/login')
-                ->withValidationErrors(['Sembra che il tuo account non sia ancora stato verificato. Verifica il tuo account per accedere.'])
+                ->withValidationErrors(['email' => 'Sembra che il tuo account non sia ancora stato verificato. Verifica il tuo account per accedere.'])
                 ->withOldData($validated);
 
             return;
