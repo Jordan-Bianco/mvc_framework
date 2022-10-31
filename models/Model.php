@@ -31,17 +31,6 @@ abstract class Model
     }
 
     /**
-     * @param array $data
-     * @return bool
-     */
-    public function update(array $data): bool
-    {
-        $this->checkFillableFields($data);
-        
-        return $this->builder->insert($this->table(), $data);
-    }
-
-    /**
      * Check che i campi inviati dal form, siano gli stessi presenti nell'array fillables del model (se presente)
      * 
      * @param array $data
