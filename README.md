@@ -3,8 +3,8 @@
 A simple mvc framework for building web applications.<br>
 The framework, written using php8, has the basic features to create web applications, such as a routing system, a complete authentication system, a session management system and other features you can read about below. <br>
 The framework is made entirely from scratch.
-It only uses two packages: PHPmailer to manage the sending of emails, and `vlucas/ phpdotenv`, a package to manage environment variables.<br>
-Also, tailwind css cdn was used to style the project, but it can be removed without problems since it is not necessarily needed.
+It only uses two packages: PHPmailer to manage the sending of emails, and `vlucas/ phpdotenv`, a package to manage environment variables.<br><br>
+Also, tailwind css cdn was used to style the project, but it can be safely removed as it is not necessarily needed.
 
 &nbsp;
 
