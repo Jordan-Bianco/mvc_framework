@@ -1,9 +1,10 @@
 ## PHP Framework
 
 A simple mvc framework for building web applications.<br>
-The framework, written using php8, has the basic features to create web applications, such as a routing system, an authentication system, a session management system and other features you can read about below. <br>
+The framework, written using php8, has the basic features to create web applications, such as a routing system, a complete authentication system, a session management system and other features you can read about below. <br>
 The framework is made entirely from scratch.
-It only uses two packages: PHPmailer to manage the sending of emails, and `vlucas/ phpdotenv`, a package to manage environment variables.
+It only uses two packages: PHPmailer to manage the sending of emails, and `vlucas/ phpdotenv`, a package to manage environment variables.<br>
+Also, tailwind css cdn was used to style the project, but it can be removed without problems since it is not necessarily needed.
 
 &nbsp;
 
@@ -71,7 +72,7 @@ $validated = $request->validate($_POST, $rules, '/login');
 ```
 
 If there are no validation errors, the `$validated` variable will contain the sanitized and validated data entered by the user.<br>
-The list that refers to the validation rules, and related messages, is contained in the Validation class, in the `$availableRules` array.
+The list that refers to the validation rules, and related messages, is contained in the `Validation` class, in the `$availableRules` array.
 
 ```php
 protected $availableRules = [
