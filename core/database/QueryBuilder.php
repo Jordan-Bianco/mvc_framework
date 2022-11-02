@@ -62,9 +62,16 @@ class QueryBuilder
         return $this;
     }
 
-    public function andWhere(string $field, string $value, ?string $condition = '='): QueryBuilder
+    /**
+     * @param string $field
+     * @param string $value
+     * @param string $condition
+     * @param string|null $tablePrefix
+     * @return QueryBuilder
+     */
+    public function andWhere(string $field, string $value, ?string $condition = '=', ?string $tablePrefix = null): QueryBuilder
     {
-        $this->query .= " AND $field $condition :$field";
+        $this->query .= " AND $tablePrefix$field $condition :$field";
 
         $this->statement = $this->pdo->prepare($this->query);
 
@@ -72,6 +79,30 @@ class QueryBuilder
 
         return $this;
     }
+
+    /**
+     * @param string $field
+     * @param string $subQuery
+     * @param string $value
+     * @param string $condition
+     * @return QueryBuilder
+     */
+    public function whereSubquery(string $field, string $subQuery, string $value, ?string $condition = '='): QueryBuilder
+    {
+        $subQueryField = trim(explode(':', $subQuery)[1], ')');
+
+        $statement = $this->pdo->prepare($subQuery);
+        $statement->bindParam(":$subQueryField", $value);
+        $statement->execute();
+        $subQueryResult = $statement->fetchColumn();
+
+        $this->query .= " WHERE $field $condition $subQueryResult";
+
+        $this->statement = $this->pdo->prepare($this->query);
+
+        return $this;
+    }
+
 
     /**
      * @param string $field
@@ -206,8 +237,7 @@ class QueryBuilder
     }
 
     /**
-     * first() viene sempre dopo where(), quindi devo solo eseguire lo statement
-     * che viene preparato nel where()
+     * first() always comes after where(), so I just have to execute the statement that is prepared in where()
      * 
      * @return array|null
      */

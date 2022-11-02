@@ -49,7 +49,7 @@ class Router
     {
         $callback = $this->routes[$requestMethod][$uri] ?? false;
 
-        /** Se la rotta nell'uri non è presente nell'array routes, cerco se ci sono parametri  */
+        /** If the route in the uri is not present in the routes array, I check if there are any parameters  */
         if (!$callback) {
 
             $callback = $this->parseUrl($uri, $requestMethod);
@@ -84,15 +84,15 @@ class Router
 
             $path = trim($path, '/');
 
-            // Cerco nelle rotte, tutte quelle che hanno un placeholder e le salvo nell'array matches
+            // I search in the routes, all those that have a placeholder and I save them in the matches array
             preg_match_all('[\{(.*?)\}]', $path, $matches);
 
             $placeholderParams = $matches[1];
 
-            // Convertire il path di ogni rotta in una stringa, sostituendo tutto ciò che c'è tra parantesi con la regex (\w+)
+            // Convert the path of each route into a string, replacing everything between braces with the regex (\w+)
             $regexRoute = "@^" . preg_replace('[\{(.*?)\}]', '(\w+)', $path) . '$@';
 
-            // Bisogna prendere il valore dell'url e sostituirlo alla regex
+            // Take the url value and substitute it for the regex
             if (preg_match_all($regexRoute, trim($uri, '/'), $vmatches)) {
                 $values = [];
 
@@ -148,6 +148,5 @@ class Router
                 $middleware->execute();
             }
         }
-
     }
 }

@@ -3,14 +3,14 @@
 use App\core\Application;
 
 /** @var $this \app\core\Renderer  */
-$this->title .= ' - Registrati';
+$this->title .= ' - Sign in';
 ?>
 
 <div class="max-w-[350px] mx-auto mt-10">
     <section class="p-6 border border-gray-100 shadow-md shadow-gray-200 rounded-lg">
-        <h2 class="text-center text-3xl font-medium mb-2.5">Sign up</h2>
-        <p class="text-center text-xs text-gray-400 mb-6">Già iscritto?
-            <span class="text-indigo-500"><a href="/login">Accedi</a></span>
+        <h2 class="text-center text-3xl font-medium mb-2.5">Sign in</h2>
+        <p class="text-center text-xs text-gray-400 mb-6">Already registered?
+            <span class="text-indigo-500"><a href="/login">Log in</a></span>
         </p>
 
         <!-- ValidationErrors -->
@@ -35,18 +35,18 @@ $this->title .= ' - Registrati';
                 <label for="password" class="block mb-1 text-gray-600 text-xs">
                     Password
                 </label>
-                <input name="password" placeholder="Inserisci la tua password" type="password" class="w-full text-xs px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200 transition">
+                <input name="password" placeholder="Enter your password" type="password" class="w-full text-xs px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200 transition">
             </div>
 
             <div class="mb-6">
                 <label for="password_confirm" class="block mb-1 text-gray-600 text-xs">
-                    Conferma Password
+                    Confirm Password
                 </label>
-                <input name="password_confirm" placeholder="Conferma la tua password" type="password" class="w-full text-xs px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200 transition">
+                <input name="password_confirm" placeholder="Conferma your password" type="password" class="w-full text-xs px-4 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-200 transition">
             </div>
 
             <button type="submit" class="tracking-wide w-full bg-indigo-400 hover:bg-indigo-500 text-white p-3 rounded-md text-xs">
-                Registrati
+                Sign in
             </button>
         </form>
     </section>

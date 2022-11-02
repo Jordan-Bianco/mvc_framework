@@ -15,7 +15,6 @@ class Request extends Validation
             return rtrim($_SERVER['REQUEST_URI'], '/');
         }
 
-        // Da rivedere
         if (str_contains($_SERVER['REQUEST_URI'], '?')) {
             return substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '?'));
         }

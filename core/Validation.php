@@ -9,7 +9,7 @@ class Validation
     public $errors = [];
 
     /**
-     * Lista delle regole di validazione, con i rispettivi messaggi di errore.
+     * List of validation rules, with their respective error messages
      */
     protected $availableRules = [
         'required' => 'Il campo :field: è obbligatorio.',
@@ -36,13 +36,12 @@ class Validation
     {
         $sanitizedData = $this->sanitize($data);
 
-        // Check che tutte le regole passate dall'utente siano presenti nell'array delle availableRules
+        // Check that all the rules passed by the user are present in the availableRules array
         $this->ruleExists($rules);
 
-        // Eseguo i controlli per ogni campo, e se ci sono degli errori, li aggiungo all'array errors
+        // Check for each field, and if there are any errors, they are added to the errors array
         $this->validateFields($rules, $sanitizedData);
 
-        // Se ci sono errori  
         if (!empty($this->errors)) {
 
             Application::$app->response->redirect($url)
@@ -106,8 +105,8 @@ class Validation
                 $table = explode(':', array_values($uniqueRule)[0])[1];
 
                 /**
-                 * Se la regola non presenta flag (rappresentata da il trattino), cerco nel DB se il valore è già presente.
-                 * Se lo è ritorno errore
+                 * If the rule has no flag (represented by the hyphen), I look in the DB if the value is already present.
+                 * If it is, return error
                  **/
                 if (!str_contains($table, '-')) {
                     $fieldInDb = Application::$app->builder
@@ -120,8 +119,7 @@ class Validation
                     }
                 } else {
                     /**
-                     * Se viene passato anche l'ID del model, cerco tra tutti i record (diversi dal model passato come argomento)
-                     * se esiste un valore come quello passato
+                     * If the modem ID is also passed, I search through all records (other than the model passed as argument), if there is a value like the one passed
                      */
                     $modelId = trim(substr($table, strpos($table, '-')), '-');
                     $table = substr($table, 0, strpos($table, '-'));
@@ -169,7 +167,7 @@ class Validation
                     return str_contains($value, 'min');
                 });
 
-                // Reindex con array_values in quanto l'index di $minRule varia in base alla posizione in cui si trova nell'array rules
+                // Reindex with array_values ​​as the $ minRule index varies based on where it is in the rules array
                 $min = explode(':', array_values($minRule)[0]);
 
                 if (strlen($fieldValue[$field]) < $min[1]) {
@@ -204,7 +202,7 @@ class Validation
 
                 $match = explode(':', array_values($matchRule)[0]);
 
-                // Se il valore del campo con il match, è diverso dal campo che deve matchare creo errore
+                // If the value of the field with the match is different from the field that must match, I create an error
                 if ($fieldValue[$field] !== $data[$match[1]]) {
                     $this->addError($field, 'match', ['match' => $match[1]]);
                 }
@@ -230,7 +228,7 @@ class Validation
                 $this->addError($field, 'special_char');
             }
 
-            // Rule required -> deve rimanere ultima nei controlli, così da avere la priorità nelle viste
+            // Rule required -> It must remain last in the controls, so as to have priority in the views
             if (str_contains($fieldValue['rules'], 'required') && !$fieldValue[$field]) {
                 $this->addError($field, 'required');
             }
@@ -245,15 +243,15 @@ class Validation
     protected function ruleExists(array $rules): void
     {
         /** 
-         *  Prendo i valori dell'array, es: ['required', 'alpha_dash] 
-         *  Flat l'array con array_merge
-         *  E prendo solo i valori unici
+         *  Take the array values, es: ['required', 'alpha_dash] 
+         *  Flat the array with array_merge
+         *  Take only the unique values
          */
         $rules = array_unique(array_merge(...array_values($rules)));
 
         foreach ($rules as $rule) {
 
-            // Se è una regola "composta", prendo tutti i caratteri prima del : 
+            // If it's a "compound" rule, I get all the characters before the:
             if (strpos($rule, ':')) {
                 $rule = substr($rule, 0, strpos($rule, ':'));
             }
@@ -276,7 +274,7 @@ class Validation
 
         $message = str_replace(':field:', $field, $message);
 
-        // Se ci sono parametri, li sostituisco al placeholder all'interno dei messaggi di errore relativi
+        // If there are any parameters, I substitute them for the placeholder within the related error messages
         if ($params) {
             if (str_contains($message, "{" . array_keys($params)[0] . "}")) {
                 $message = str_replace("{" . array_keys($params)[0] . "}", array_values($params)[0], $message);

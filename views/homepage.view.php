@@ -1,6 +1,9 @@
 <?php
 
 /** @var $this \app\core\Renderer  */
+
+use App\core\Application;
+
 $this->title .= ' -  Homepage';
 ?>
 

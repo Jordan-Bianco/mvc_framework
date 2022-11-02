@@ -52,7 +52,6 @@ class Session
     /**
      * @param string $key
      * @return mixed
-     * @throws \Exception
      */
     public function get(string $key): mixed
     {

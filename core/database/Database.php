@@ -19,7 +19,10 @@ class Database
         }
     }
 
-    public function applyMigrations()
+    /**
+     * @return void 
+     */
+    public function applyMigrations(): void
     {
         $this->createMigrationsTable();
 
@@ -27,7 +30,7 @@ class Database
 
         $files = $this->getMigrationFilesName();
 
-        // Le migrations da applicare sono date dalla differenza tra quelle già applicate e i files presenti nella cartella migrations
+        // The migrations to be applied are given by the difference between those already applied and the files in the migrations folder
         $toApplyMigrations = array_diff($files, $appliedMigrations);
 
         foreach ($toApplyMigrations as $migration) {
@@ -51,7 +54,7 @@ class Database
     }
 
     /**
-     * Crea una tabella migrations, in cui si tiene traccia delle migration effettuate
+     * Create a migrations table, which keeps track of the migrations already applied
      * 
      * @return void 
      */
@@ -82,7 +85,7 @@ class Database
     }
 
     /**
-     * Inserisco nella tabella migrations, il nome di ogni file di migration
+     * I insert in the migrations table, the name of each migration file
      * 
      * @param array $migrations
      * @return void
@@ -101,7 +104,7 @@ class Database
     }
 
     /**
-     * Ritorna tutti i nomi dei file all'interno della cartella migrations
+     * Returns all the filenames inside the migrations folder
      * 
      * @return array 
      */
@@ -109,20 +112,23 @@ class Database
     {
         $files = scandir(ROOT_PATH . '/migrations');
 
-        // Filtro per prendere solo i nomi dei file
+        // Filter to take filenames only
         $files = array_filter($files, function ($file) {
             if (strlen($file > 3)) {
                 return $file;
             }
         });
 
-        // Rimuovo l'estensione
+        // Remove the extension
         return array_map(function ($file) {
             return pathinfo($file, PATHINFO_FILENAME);
         }, $files);
     }
 
-    public function truncateDatabaseTables()
+    /**
+     * @return void 
+     */
+    public function truncateDatabaseTables(): void
     {
         $this->pdo->exec("SET FOREIGN_KEY_CHECKS=0");
 
@@ -143,7 +149,10 @@ class Database
         $this->pdo->exec("SET FOREIGN_KEY_CHECKS=1");
     }
 
-    public function dropDatabaseTables()
+    /**
+     * @return void 
+     */
+    public function dropDatabaseTables(): void
     {
         $this->pdo->exec("SET FOREIGN_KEY_CHECKS=0");
 

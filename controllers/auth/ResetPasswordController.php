@@ -47,6 +47,6 @@ class ResetPasswordController extends Controller
             ->update('users', ['password' => Auth::hash($validated['password'])], $user['id']);
 
         $this->app->response->redirect('/login')
-            ->with('success', 'Password resettata correttamente.');
+            ->with('success', 'Password reset successfully');
     }
 }

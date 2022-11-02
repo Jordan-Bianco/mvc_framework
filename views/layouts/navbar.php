@@ -17,8 +17,8 @@ use App\core\Session;
     <div class="w-1/2 flex items-center justify-end space-x-2">
         <?php if (!Session::isLoggedIn()) : ?>
             <div class="flex items-center space-x-2">
-                <a href="/login" class="block hover:text-indigo-500 <?= Application::$app->request->getUri() === 'login' ? 'text-indigo-500' : '' ?>">Login</a>
-                <a href="/register" class="block hover:text-indigo-500 <?= Application::$app->request->getUri() === 'register' ? 'text-indigo-500' : '' ?>">Registrati</a>
+                <a href="/login" class="block hover:text-indigo-500 <?= Application::$app->request->getUri() === 'login' ? 'text-indigo-500' : '' ?>">Log in</a>
+                <a href="/register" class="block hover:text-indigo-500 <?= Application::$app->request->getUri() === 'register' ? 'text-indigo-500' : '' ?>">Sign in</a>
             </div>
         <?php else : ?>
             <div class="flex items-center space-x-2">
