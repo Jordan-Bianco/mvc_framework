@@ -23,7 +23,7 @@ $token = bin2hex(random_bytes(32));
 
 $query = "
     INSERT INTO users(username, email, password, verified, token)
-    VALUES('user001', 'user001@mail.com', '$password', 1, '$token');
+    VALUES('user', 'user@mail.com', '$password', 1, '$token');
     ";
 
 $app->db->pdo->exec($query);

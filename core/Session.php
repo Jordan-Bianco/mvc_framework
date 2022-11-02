@@ -11,11 +11,16 @@ class Session
         }
     }
 
-    public function destroySession()
+    public function destroySession(): void
     {
         if (session_status() === PHP_SESSION_ACTIVE) {
             session_destroy();
         }
+    }
+
+    public function regenerateSessionId(): void
+    {
+        session_regenerate_id();
     }
 
     /**

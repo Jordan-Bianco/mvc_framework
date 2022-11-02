@@ -51,6 +51,7 @@ class LoginController extends Controller
         }
 
         $this->app->session->set('user', $user);
+        $this->app->session->regenerateSessionId();
 
         $this->app->response->redirect('/dashboard')
             ->with('success', "Welcome back <strong> " . $user['username'] . "</strong>");

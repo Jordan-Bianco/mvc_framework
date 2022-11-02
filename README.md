@@ -30,7 +30,9 @@ All authentication-related routes can be found in the `routes` folder, in the `a
     -   Send email to verify account
     -   Password reset
 
--   Login, logout
+-   Login
+    -   Session regeneration
+-   Logout
 -   Delete account
 
 &nbsp;
