@@ -8,14 +8,15 @@ Also, tailwind css cdn was used to style the project, but it can be safely remov
 
 &nbsp;
 
-### Usage
+### Installation
 
 -   Clone the project with "git clone https://github.com/Jordan-Bianco/mvc_framework.git"
 -   Run the command `composer install`
+-   Create the `.env` file and copy the contents of the `.env-example` file by entering your credentials
+-   Run the `php migrations.php` command in the terminal to create all the tables in your database
+-   Optionally you can run the command `php seed.php` to seed the database with a dummy user
 -   Enter the public folder
 -   Launch the server with the command `php -S localhost:8888`
--   Create the `.env` file and copy the contents of the `.env-example` file by entering your credentials
--   Optionally run the `php seed.php` command in the terminal to seed the database with a dummy user
 
 &nbsp;
 
