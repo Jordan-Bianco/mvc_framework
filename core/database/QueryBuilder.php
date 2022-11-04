@@ -17,10 +17,10 @@ class QueryBuilder
     }
 
     /**
-     * @param array|null $fields
+     * @param array $fields
      * @return QueryBuilder
      */
-    public function select(?array $fields = []): QueryBuilder
+    public function select(array $fields = []): QueryBuilder
     {
         if (empty($fields)) {
             $fields = '*';
@@ -45,10 +45,10 @@ class QueryBuilder
     }
 
     /**
-     * @param string|null $expression
+     * @param string $expression
      * @return QueryBuilder
      */
-    public function count(?string $expression = '*'): QueryBuilder
+    public function count(string $expression = '*'): QueryBuilder
     {
         $this->query = "SELECT COUNT($expression)";
 
@@ -62,7 +62,7 @@ class QueryBuilder
      * @param string|null $tablePrefix
      * @return QueryBuilder
      */
-    public function where(string $field, string $value, ?string $condition = '=', ?string $tablePrefix = null): QueryBuilder
+    public function where(string $field, string $value, string $condition = '=', ?string $tablePrefix = null): QueryBuilder
     {
         $this->query .= " WHERE $tablePrefix$field $condition :$field";
 
@@ -116,6 +116,23 @@ class QueryBuilder
 
     /**
      * @param string $field
+     * @param array $array
+     * @param string|null $tablePrefix
+     * @return QueryBuilder
+     */
+    public function whereIn(string $field, array $array, ?string $tablePrefix = null): QueryBuilder
+    {
+        $array = implode(', ', $array);
+
+        $this->query .= " WHERE $tablePrefix$field IN ($array)";
+
+        $this->statement = $this->pdo->prepare($this->query);
+
+        return $this;
+    }
+
+    /**
+     * @param string $field
      * @param string $value
      * @param string $condition
      * @param string|null $tablePrefix
@@ -128,6 +145,23 @@ class QueryBuilder
         $this->statement = $this->pdo->prepare($this->query);
 
         $this->params[] = [":$field" => $value];
+
+        return $this;
+    }
+
+    /**
+     * @param string $field
+     * @param array $array
+     * @param string|null $tablePrefix
+     * @return QueryBuilder
+     */
+    public function havingIn(string $field, array $array, ?string $tablePrefix = null): QueryBuilder
+    {
+        $array = implode(', ', $array);
+
+        $this->query .= " HAVING $tablePrefix$field IN ($array)";
+
+        $this->statement = $this->pdo->prepare($this->query);
 
         return $this;
     }
