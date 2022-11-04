@@ -47,13 +47,15 @@ class RegisterController extends Controller
         ]);
 
         $user = $this->app->builder
-            ->select('users')
+            ->select()
+            ->from('users')
             ->where('email', $validated['email'])
             ->first();
 
-        Auth::sendVerificationMail($user);
+        // Auth::sendVerificationMail($user);
 
         $this->app->response->redirect('/login')
-            ->with('success', 'Thank you for registering. An email has been sent to your address ' . $user['email'] . ' to verify your account');
+            ->with('success', 'Thank you for registering');
+        // ->with('success', 'Thank you for registering. An email has been sent to your address ' . $user['email'] . ' to verify your account');
     }
 }

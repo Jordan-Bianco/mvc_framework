@@ -3,7 +3,7 @@
 A simple mvc framework for building web applications.<br>
 The framework, written using php8, has the basic features to create web applications, such as a routing system, a complete authentication system, a session management system and other features you can read about below. <br>
 The framework is made entirely from scratch.
-It only uses two packages: PHPmailer to manage the sending of emails, and `vlucas/ phpdotenv`, a package to manage environment variables.<br><br>
+It only uses two packages: PHPmailer to manage the sending of emails, and `vlucas/phpdotenv`, a package to manage environment variables.<br><br>
 Also, tailwind css cdn was used to style the project, but it can be safely removed as it is not necessarily needed.
 
 &nbsp;
@@ -24,6 +24,8 @@ Also, tailwind css cdn was used to style the project, but it can be safely remov
 
 The framework has a complete authentication system. From user registration, to password recovery, to account deletion. <br>
 All authentication-related routes can be found in the `routes` folder, in the `auth.php` file
+
+> <small><strong>note</strong></small> The email for the account verification, and the check whether the user is verified or not (in the LoginController), are disabled by default.
 
 -   User registration
 
@@ -139,26 +141,38 @@ public function __construct()
 
 The Query Builder class is used to interact with the database and perform operations on it. This class has access to the PDO instance.
 <br>
-Examples:
+To run a query, you call the builder method on the app instance.
+Then you can chain the methods to create queries, from the simplest to the most complex.<br>
+
+> <small><strong>note</strong></small> Occasionally it is possible to pass raw queries, using the raw method.
 
 ```php
 $user = $this->app->builder
-  ->select('users', ['id', 'username', 'email'])
-  ->where('id', $request->routeParams['id'])
-  ->first()
+  ->select()
+  ->from('users')
+  ->get();
 
-$tweet = $this->app->builder
-  ->select('tweets', [
-    'tweets.*',
-    'users.username',
-    'COUNT(likes.tweet_id) as likes_count',
-    'COUNT(comments.tweet_id) as comments_count'
-  ])
-  ->leftJoin('likes', 'tweet_id', 'tweets', 'id')
-  ->leftJoin('comments', 'tweet_id', 'tweets', 'id')
-  ->join('users', 'id', 'tweets', 'user_id')
-  ->where('id', $request->routeParams['id'], '=', 'tweets.')
+
+$usersCount = Application::$app->builder
+  ->count()
+  ->from('users')
+  ->getCount();
+
+
+$users = Application::$app->builder
+  ->select(['id', 'username'])
+  ->from('users')
+  ->where('id', $id)
+  ->andWhere('verified', true)
   ->first();
+
+
+$users = Application::$app->builder
+  ->select(['users.id, users.username, count(posts.id) as post_count',])
+  ->from('users')
+  ->join('posts', 'user_id', 'users', 'id')
+  ->groupBy('users.id')
+  ->get();
 ```
 
 &nbsp;

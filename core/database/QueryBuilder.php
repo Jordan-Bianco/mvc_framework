@@ -17,29 +17,40 @@ class QueryBuilder
     }
 
     /**
-     * @param string $table
-     * @return int
+     * @param array|null $fields
+     * @return QueryBuilder
      */
-    public function count(string $table): int
+    public function select(?array $fields = []): QueryBuilder
     {
-        $query = "SELECT COUNT(*) FROM $table";
+        if (empty($fields)) {
+            $fields = '*';
+        } else {
+            $fields = implode(', ', $fields);
+        }
 
-        $statement = $this->pdo->prepare($query);
-        $statement->execute();
+        $this->query = "SELECT $fields";
 
-        return $statement->fetchColumn();
+        return $this;
     }
 
     /**
      * @param string $table
-     * @param array|null $fields
      * @return QueryBuilder
      */
-    public function select(string $table, ?array $fields = []): QueryBuilder
+    public function from(string $table): QueryBuilder
     {
-        $fields = $fields ? implode(', ', $fields) : '*';
+        $this->query .= " FROM $table";
 
-        $this->query = "SELECT $fields FROM $table";
+        return $this;
+    }
+
+    /**
+     * @param string|null $expression
+     * @return QueryBuilder
+     */
+    public function count(?string $expression = '*'): QueryBuilder
+    {
+        $this->query = "SELECT COUNT($expression)";
 
         return $this;
     }
@@ -103,7 +114,6 @@ class QueryBuilder
         return $this;
     }
 
-
     /**
      * @param string $field
      * @param string $value
@@ -120,17 +130,6 @@ class QueryBuilder
         $this->params[] = [":$field" => $value];
 
         return $this;
-    }
-
-    public function bindParams(): void
-    {
-        foreach ($this->params as $param) {
-            foreach ($param as $key => &$value) {
-                $this->statement->bindParam($key, $value);
-            }
-        }
-
-        $this->params = [];
     }
 
     /**
@@ -211,22 +210,26 @@ class QueryBuilder
         return $this;
     }
 
+    /**
+     * @return void 
+     */
+    public function bindParams(): void
+    {
+        foreach ($this->params as $param) {
+            foreach ($param as $key => &$value) {
+                $this->statement->bindParam($key, $value);
+            }
+        }
+
+        $this->params = [];
+    }
 
     /**
      * @return array 
      */
     public function get(): array
     {
-        if (isset($this->statement)) {
-
-            $this->bindParams();
-
-            $this->statement->execute();
-        } else {
-
-            $this->statement = $this->pdo->prepare($this->query);
-            $this->statement->execute();
-        }
+        $this->prepareAndExecute();
 
         $results = $this->statement->fetchAll();
 
@@ -237,17 +240,11 @@ class QueryBuilder
     }
 
     /**
-     * first() always comes after where(), so I just have to execute the statement that is prepared in where()
-     * 
      * @return array|null
      */
     public function first(): array |null
     {
-        if (!empty($this->params)) {
-            $this->bindParams();
-        }
-
-        $this->statement->execute();
+        $this->prepareAndExecute();
 
         $result = $this->statement->fetch();
 
@@ -255,6 +252,35 @@ class QueryBuilder
         $this->query = null;
 
         return $result ? $result : null;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCount(): int
+    {
+        $this->prepareAndExecute();
+
+        $result = $this->statement->fetchColumn();
+
+        $this->statement = null;
+        $this->query = null;
+
+        return $result ? $result : null;
+    }
+
+    /**
+     * @return void 
+     */
+    protected function prepareAndExecute(): void
+    {
+        if (isset($this->statement)) {
+            $this->bindParams();
+            $this->statement->execute();
+        } else {
+            $this->statement = $this->pdo->prepare($this->query);
+            $this->statement->execute();
+        }
     }
 
     /**

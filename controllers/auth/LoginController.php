@@ -42,13 +42,13 @@ class LoginController extends Controller
             return;
         }
 
-        if (!Auth::isVerified($user)) {
-            $this->app->response->redirect('/login')
-                ->withValidationErrors(['email' => 'It seems your account has not yet been verified. Verify your account to log in'])
-                ->withOldData($validated);
+        // if (!Auth::isVerified($user)) {
+        //     $this->app->response->redirect('/login')
+        //         ->withValidationErrors(['email' => 'It seems your account has not yet been verified. Verify your account to log in'])
+        //         ->withOldData($validated);
 
-            return;
-        }
+        //     return;
+        // }
 
         $this->app->session->set('user', $user);
         $this->app->session->regenerateSessionId();
