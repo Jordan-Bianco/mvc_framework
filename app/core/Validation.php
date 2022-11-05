@@ -12,18 +12,18 @@ class Validation
      * List of validation rules, with their respective error messages
      */
     protected $availableRules = [
-        'required' => 'Il campo :field: è obbligatorio.',
-        'email' => 'Il campo :field: deve contenere un indirizzo email valido.',
-        'alpha_dash' => 'Il campo :field: può contenere solo lettere, numeri, trattini e underscore.',
-        'unique' => 'Il campo :field: è già presente nella tabella {table}.',
+        'required'     => 'The :field: field is required',
+        'email'        => 'The :field: field must contain a valid email address',
+        'alpha_dash'   => 'The :field: field can only contain letters, numbers, dashes and underscores',
+        'unique'         => 'The :field: field is already present in the {table} table',
         'exists' => 'Il campo :field: non è presente nel database.',
-        'min' => 'Il campo :field: non può essere di lunghezza inferiore a {min} caratteri.',
-        'max' => 'Il campo :field: non può essere di lunghezza superiore a {max} caratteri.',
-        'match' => 'Il campo :field: deve essere uguale al campo {match}.',
-        'letter' => 'Il campo :field: deve contenere almeno una lettera.',
-        'number' => 'Il campo :field: deve contenere almeno un numero.',
-        'upper' => 'Il campo :field: deve contenere almeno una lettera maiuscola.',
-        'special_char' => 'Il campo :field: deve contenere almeno un carattere speciale. !#$%&?@_'
+        'min'          => 'The :field: field cannot be shorter than {min} characters',
+        'max'          => 'The :field: field cannot be longer than {max} characters',
+        'match'        => 'The :field: field must be the same as the {match} field',
+        'letter'       => 'The :field: field must contain at least one letter',
+        'number'       => 'The :field: field must contain at least one number',
+        'capital'      => 'The :field: field must contain at least one capital letter',
+        'special_char' => 'The :field: field must contain at least one special character, among the following: !#$%&?@_'
     ];
 
     /**
@@ -51,7 +51,7 @@ class Validation
             exit;
         }
 
-        return $data;
+        return $sanitizedData;
     }
 
     /**
@@ -77,7 +77,7 @@ class Validation
         foreach ($rules as $field => $validationRules) {
 
             $fieldValue = [
-                //  "username" => "valore input",
+                //  "username" => "user input value",
                 //  "rules"    => "required,alpha_dash"
                 $field => $data[$field],
                 'rules' => implode(',', $validationRules)
@@ -120,7 +120,7 @@ class Validation
                     }
                 } else {
                     /**
-                     * If the modem ID is also passed, I search through all records (other than the model passed as argument), if there is a value like the one passed
+                     * If the model ID is also passed, I search through all records (other than the model passed as argument), if there is a value like the one passed
                      */
                     $modelId = trim(substr($table, strpos($table, '-')), '-');
                     $table = substr($table, 0, strpos($table, '-'));
